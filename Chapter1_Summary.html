@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Foundations of Financial Accounting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 4px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 4px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section h2 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8efff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card h3 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+            padding: 8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .financial-statements {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .statement {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .statement:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .statement h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .interactive-element {
+            background: #f8f9ff;
+            border: 3px dashed #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            background: #667eea;
+            color: white;
+            border-style: solid;
+        }
+
+        .quiz-section {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .quiz-question {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+        }
+
+        .quiz-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .nav-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .completion-badge {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            animation: bounceIn 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80% {
+                animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+            }
+            0% {
+                opacity: 0;
+                transform: scale3d(.3, .3, .3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(.9, .9, .9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(.97, .97, .97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .section {
+                padding: 20px;
+            }
+            .financial-statements {
+                grid-template-columns: 1fr;
+            }
+            .quiz-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Foundations of Financial Accounting</h1>
+            <p>Chapter 1 Interactive Summary - Your Gateway to Accounting Excellence</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+
+        <!-- Section 1: Organizational Forms -->
+        <div class="section active" id="section1">
+            <h2>🏢 Organizational Forms & Decision Makers</h2>
+            <div class="card-grid">
+                <div class="card" onclick="showDetails('sole-prop')">
+                    <h3><span class="icon">👤</span>Sole Proprietorship</h3>
+                    <p>Single owner, unlimited liability, simplest form of business organization</p>
+                </div>
+                <div class="card" onclick="showDetails('partnership')">
+                    <h3><span class="icon">🤝</span>Partnership</h3>
+                    <p>Two or more owners, shared profits and losses, joint liability</p>
+                </div>
+                <div class="card" onclick="showDetails('corporation')">
+                    <h3><span class="icon">🏛️</span>Corporation</h3>
+                    <p>Separate legal entity, limited liability, can issue stock</p>
+                </div>
+                <div class="card" onclick="showDetails('llc')">
+                    <h3><span class="icon">⚖️</span>Limited Liability Company</h3>
+                    <p>Combines corporation benefits with partnership flexibility</p>
+                </div>
+            </div>
+            
+            <div class="interactive-element" onclick="toggleDecisionMakers()">
+                <h3>🎯 Click to Explore Key Decision Makers</h3>
+                <p>Investors • Creditors • Managers • Regulators • Customers</p>
+                <div id="decisionMakers" style="display:none; margin-top:20px;">
+                    <div style="text-align: left;">
+                        <p><strong>Investors:</strong> Use financial info to decide whether to buy, sell, or hold stocks</p>
+                        <p><strong>Creditors:</strong> Evaluate ability to repay loans and credit</p>
+                        <p><strong>Managers:</strong> Make operational and strategic business decisions</p>
+                        <p><strong>Regulators:</strong> Ensure compliance with laws and fair market practices</p>
+                        <p><strong>Customers:</strong> Assess company stability for long-term relationships</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Financial Statements Overview -->
+        <div class="section" id="section2">
+            <h2>📈 The Four Financial Statements</h2>
+            <div class="financial-statements">
+                <div class="statement" onclick="explainStatement('income')">
+                    <h4>📊 Income Statement</h4>
+                    <p>Revenues - Expenses = Net Income</p>
+                    <p><em>Performance over TIME</em></p>
+                </div>
+                <div class="statement" onclick="explainStatement('balance')">
+                    <h4>⚖️ Balance Sheet</h4>
+                    <p>Assets = Liabilities + Equity</p>
+                    <p><em>Financial position at a POINT in time</em></p>
+                </div>
+                <div class="statement" onclick="explainStatement('equity')">
+                    <h4>🏦 Statement of Equity</h4>
+                    <p>Changes in owner's equity</p>
+                    <p><em>Equity changes over TIME</em></p>
+                </div>
+                <div class="statement" onclick="explainStatement('cash')">
+                    <h4>💰 Statement of Cash Flows</h4>
+                    <p>Operating + Investing + Financing</p>
+                    <p><em>Cash movements over TIME</em></p>
+                </div>
+            </div>
+            
+            <div id="statementDetails" style="margin-top: 30px; padding: 20px; background: #f8f9ff; border-radius: 15px; display: none;">
+                <h3 id="statementTitle"></h3>
+                <p id="statementDescription"></p>
+            </div>
+        </div>
+
+        <!-- Section 3: Income Statement Details -->
+        <div class="section" id="section3">
+            <h2>📊 Income Statement Deep Dive</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                The Income Statement shows <strong>performance over a period of time</strong> (month, quarter, year)
+            </p>
+            
+            <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin: 20px 0; font-size: 1.3em;">
+                <strong>Revenues - Expenses = Net Income</strong>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">💰</span>Revenues (Income)</h3>
+                    <p><strong>What the business earns from selling goods/services:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li>Sales Revenue (from selling products)</li>
+                        <li>Service Revenue (from providing services)</li>
+                        <li>Interest Revenue (from loans made to others)</li>
+                        <li>Rental Revenue (from renting property)</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">💸</span>Expenses</h3>
+                    <p><strong>Costs incurred to generate revenues:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li>Cost of Goods Sold (cost of products sold)</li>
+                        <li>Salaries Expense (employee wages)</li>
+                        <li>Rent Expense (office/store rent)</li>
+                        <li>Utilities Expense (electricity, water)</li>
+                        <li>Advertising Expense (marketing costs)</li>
+                        <li>Interest Expense (on borrowed money)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Statement of Retained Earnings Details -->
+        <div class="section" id="section4">
+            <h2>🏦 Statement of Retained Earnings Deep Dive</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                Shows <strong>changes in retained earnings over a period of time</strong>
+            </p>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin: 20px 0;">
+                <div style="font-size: 1.3em; margin-bottom: 15px;"><strong>The Flow:</strong></div>
+                <div style="font-size: 1.1em;">Beginning Retained Earnings<br/>+ Net Income (from Income Statement)<br/>- Dividends Paid<br/>= Ending Retained Earnings</div>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">📈</span>Beginning Balance</h3>
+                    <p>Retained earnings at the start of the period (from previous period's ending balance)</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">➕</span>Add: Net Income</h3>
+                    <p>Profit earned during the period (comes directly from the Income Statement)</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">➖</span>Subtract: Dividends</h3>
+                    <p>Cash distributions to shareholders (reduces retained earnings)</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🎯</span>Ending Balance</h3>
+                    <p>Final retained earnings (goes to the Balance Sheet as part of equity)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Balance Sheet Details -->
+        <div class="section" id="section5">
+            <h2>⚖️ Balance Sheet Deep Dive</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                Shows <strong>financial position at a specific point in time</strong> (like a photograph)
+            </p>
+            
+            <div style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin: 20px 0; font-size: 1.3em;">
+                <strong>Assets = Liabilities + Stockholders' Equity</strong><br/>
+                <em style="font-size: 0.9em;">This equation MUST always balance!</em>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">🏢</span>Assets</h3>
+                    <p><strong>Resources owned by the business:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Current Assets:</strong> Cash, Accounts Receivable, Inventory, Prepaid Expenses</li>
+                        <li><strong>Long-term Assets:</strong> Land, Buildings, Equipment, Vehicles</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">💳</span>Liabilities</h3>
+                    <p><strong>Debts owed to others:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Current Liabilities:</strong> Accounts Payable, Short-term Notes Payable, Accrued Expenses</li>
+                        <li><strong>Long-term Liabilities:</strong> Mortgages, Long-term Loans, Bonds Payable</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">👥</span>Stockholders' Equity</h3>
+                    <p><strong>Owners' stake in the business:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Common Stock:</strong> Investment by shareholders</li>
+                        <li><strong>Retained Earnings:</strong> Accumulated profits kept in business (from Statement of RE)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Statement of Cash Flows Details -->
+        <div class="section" id="section6">
+            <h2>💰 Statement of Cash Flows Deep Dive</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                Shows <strong>cash receipts and payments over a period of time</strong>
+            </p>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">🔄</span>Operating Activities</h3>
+                    <p><strong>Day-to-day business operations:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Cash IN:</strong> Collections from customers, interest received</li>
+                        <li><strong>Cash OUT:</strong> Payments to suppliers, employee salaries, rent, utilities</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: #667eea;"><em>Most important section - shows if core business generates cash!</em></p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🏗️</span>Investing Activities</h3>
+                    <p><strong>Buying/selling long-term assets:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Cash OUT:</strong> Buying equipment, buildings, land, other companies</li>
+                        <li><strong>Cash IN:</strong> Selling equipment, buildings, investments</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: #667eea;"><em>Usually negative for growing companies (investing in future)</em></p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🏦</span>Financing Activities</h3>
+                    <p><strong>Getting/repaying money from investors and creditors:</strong></p>
+                    <ul style="margin-top: 10px; text-align: left;">
+                        <li><strong>Cash IN:</strong> Borrowing money, issuing stock to investors</li>
+                        <li><strong>Cash OUT:</strong> Repaying loans, paying dividends to shareholders</li>
+                    </ul>
+                    <p style="margin-top: 10px; color: #667eea;"><em>Shows how company finances its operations and growth</em></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 7: How Financial Statements Connect -->
+        <div class="section" id="section7">
+            <h2>🔗 How the Financial Statements Connect</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                The financial statements are like puzzle pieces - they all fit together!
+            </p>
+            
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 20px 0;">
+                <h3 style="text-align: center; margin-bottom: 20px;">The Flow of Information</h3>
+                <div style="max-width: 600px; margin: 0 auto;">
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">1️⃣ Income Statement</div>
+                        <div style="margin: 10px 0; font-size: 1.1em;">Revenues - Expenses</div>
+                        <div style="background: #4CAF50; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.1em;">= Net Income</div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2.5em; margin: 10px 0;">⬇️</div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">2️⃣ Statement of Retained Earnings</div>
+                        <div style="margin: 10px 0; font-size: 1.1em;">Beginning RE + Net Income - Dividends</div>
+                        <div style="background: #4CAF50; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.1em;">= Ending Retained Earnings</div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2.5em; margin: 10px 0;">⬇️</div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">3️⃣ Balance Sheet</div>
+                        <div style="margin: 10px 0; font-size: 1.1em;">Assets = Liabilities + Stockholders' Equity</div>
+                        <div style="background: #4CAF50; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.1em;">Retained Earnings is part of Equity</div>
+                    </div>
+                    
+                    <div style="text-align: center; font-size: 2.5em; margin: 10px 0;">⬇️</div>
+                    
+                    <div style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">💰 Statement of Cash Flows</div>
+                        <div style="margin: 10px 0; font-size: 1.1em;">Net Income is the starting point for Operating Activities</div>
+                        <div style="background: #4CAF50; padding: 10px; border-radius: 5px; font-weight: bold; font-size: 1.1em;">(then adjusted for non-cash items)</div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleConnectionDetails()">
+                <h3>💡 Click to See Detailed Connection Examples</h3>
+                <p>See how specific numbers flow between statements</p>
+                <div id="connectionDetails" style="display:none; margin-top:20px; text-align: left;">
+                    <div style="background: white; color: black; padding: 20px; border-radius: 10px;">
+                        <h4>Example: ABC Company</h4>
+                        <p><strong>Income Statement shows:</strong> Net Income = $50,000</p>
+                        <p><strong>Statement of RE shows:</strong> Beginning RE $100,000 + Net Income $50,000 - Dividends $10,000 = Ending RE $140,000</p>
+                        <p><strong>Balance Sheet shows:</strong> Retained Earnings = $140,000 (as part of Stockholders' Equity)</p>
+                        <p><strong>Cash Flow Statement shows:</strong> The $50,000 net income is the starting point for Operating Activities (then adjusted for non-cash items)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: GAAP -->
+        <div class="section" id="section8">
+            <h2>📋 Generally Accepted Accounting Principles (GAAP)</h2>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #666;">
+                The "rules of the game" for financial reporting in the United States
+            </p>
+
+            <div style="background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin: 20px 0;">
+                <h3>Why do we need GAAP?</h3>
+                <p style="font-size: 1.1em; margin-top: 15px;">Without standardized rules, every company could report financial information differently, making comparisons impossible!</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">🏛️</span>FASB</h3>
+                    <p><strong>Financial Accounting Standards Board</strong> - The primary organization that creates GAAP in the US. Think of them as the "rule makers" for accounting.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">⚖️</span>Key GAAP Principles</h3>
+                    <ul style="text-align: left; margin-top: 10px;">
+                        <li><strong>Revenue Recognition:</strong> Record revenue when earned, not necessarily when cash is received</li>
+                        <li><strong>Matching Principle:</strong> Match expenses with the revenues they help generate</li>
+                        <li><strong>Full Disclosure:</strong> Report all information that could affect decisions</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🌍</span>IFRS vs GAAP</h3>
+                    <p><strong>International Financial Reporting Standards (IFRS)</strong> are used by most countries worldwide. US uses GAAP, but they're gradually converging.</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🔍</span>Who Must Follow GAAP?</h3>
+                    <ul style="text-align: left; margin-top: 10px;">
+                        <li><strong>Public companies:</strong> MUST follow GAAP (SEC requires it)</li>
+                        <li><strong>Private companies:</strong> Often follow GAAP for consistency and credibility</li>
+                        <li><strong>CPAs:</strong> Must follow GAAP when preparing financial statements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleGAAPDetails()">
+                <h3>📚 Click to Explore GAAP Assumptions & Constraints</h3>
+                <p>The fundamental assumptions that underlie all of GAAP</p>
+                <div id="gaapDetails" style="display:none; margin-top:20px; text-align: left;">
+                    <div style="background: white; color: black; padding: 20px; border-radius: 10px;">
+                        <h4>Key Assumptions:</h4>
+                        <p><strong>Economic Entity:</strong> Business activities are separate from personal activities</p>
+                        <p><strong>Going Concern:</strong> Business will continue operating in the foreseeable future</p>
+                        <p><strong>Monetary Unit:</strong> Only transactions measurable in dollars are recorded</p>
+                        <p><strong>Periodicity:</strong> Business life can be divided into artificial time periods for reporting</p>
+                        
+                        <h4 style="margin-top: 15px;">Key Constraints:</h4>
+                        <p><strong>Materiality:</strong> Only report items significant enough to affect decisions</p>
+                        <p><strong>Cost-Benefit:</strong> Benefits of reporting should exceed the costs</p>
+                        <p><strong>Conservatism:</strong> When in doubt, choose the option least likely to overstate assets/income</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 9: Users of Financial Information -->
+
+        <!-- Section 9: Users of Financial Information -->
+        <div class="section" id="section9">
+            <h2>🎯 How Decision Makers Use Financial Statements</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">📈</span>Investment Decisions</h3>
+                    <p>Analyze profitability, growth potential, and risk to make informed investment choices</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">💳</span>Credit Decisions</h3>
+                    <p>Assess ability to repay loans by examining cash flows and debt levels</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🎯</span>Operational Decisions</h3>
+                    <p>Managers use financial data to optimize operations and strategic planning</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">📊</span>Performance Evaluation</h3>
+                    <p>Compare actual results to budgets and industry benchmarks</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 10: Useful Financial Information -->
+        <div class="section" id="section10">
+            <h2>✨ Characteristics of Useful Financial Information</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3><span class="icon">📍</span>Relevance</h3>
+                    <p>Information must be capable of making a difference in decisions</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🎯</span>Faithful Representation</h3>
+                    <p>Information must be complete, neutral, and free from error</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">📊</span>Comparability</h3>
+                    <p>Users should be able to compare across companies and time periods</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">✅</span>Verifiability</h3>
+                    <p>Independent observers should reach similar conclusions</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">⏰</span>Timeliness</h3>
+                    <p>Information must be available when needed for decision-making</p>
+                </div>
+                <div class="card">
+                    <h3><span class="icon">🔍</span>Understandability</h3>
+                    <p>Information should be clear and comprehensive to users</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Section -->
+        <div class="quiz-section" id="quizSection">
+            <h2>🧠 Test Your Knowledge!</h2>
+            <div class="quiz-question" id="quizQuestion">
+                Which financial statement shows a company's financial position at a specific point in time?
+            </div>
+            <div class="quiz-options">
+                <div class="quiz-option" onclick="selectAnswer(0)">A) Income Statement</div>
+                <div class="quiz-option" onclick="selectAnswer(1)">B) Balance Sheet</div>
+                <div class="quiz-option" onclick="selectAnswer(2)">C) Statement of Cash Flows</div>
+                <div class="quiz-option" onclick="selectAnswer(3)">D) Statement of Equity</div>
+            </div>
+            <div id="quizResult"></div>
+        </div>
+
+        <div class="completion-badge" id="completionBadge">
+            <h3>🎉 Congratulations!</h3>
+            <p>You've completed the Chapter 1 overview. You're ready to dive deeper into the fascinating world of accounting!</p>
+            
+            <div style="background: white; color: black; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h4>📝 Completion Verification</h4>
+                <p><strong>Your Completion Code:</strong></p>
+                <div id="completionCode" style="font-family: monospace; font-size: 1.2em; font-weight: bold; color: #4CAF50; margin: 10px 0;"></div>
+                <p style="font-size: 0.9em; color: #666;">Screenshot this page or copy the code above to submit as proof of completion.</p>
+                <button onclick="copyCompletionCode()" style="background: #4CAF50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-top: 10px;">📋 Copy Code</button>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-button" onclick="previousSection()" id="prevButton" disabled>← Previous</button>
+            <button class="nav-button" onclick="nextSection()" id="nextButton">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 11; // Updated to include new sections
+
+        const statementData = {
+            income: {
+                title: "Income Statement",
+                description: "Shows a company's revenues and expenses over a period of time (monthly, quarterly, or annually). The bottom line shows net income (profit) or net loss. Think of it as a movie - it shows performance over time."
+            },
+            balance: {
+                title: "Balance Sheet",
+                description: "Shows what a company owns (assets), owes (liabilities), and the owners' stake (equity) at a specific date. It's like a photograph - it captures the financial position at one moment in time. The accounting equation: Assets = Liabilities + Equity must always balance!"
+            },
+            equity: {
+                title: "Statement of Equity",
+                description: "Shows how the owners' equity changed during a specific period. It includes investments by owners, net income earned, and distributions (dividends) to owners. It connects the balance sheet and income statement."
+            },
+            cash: {
+                title: "Statement of Cash Flows",
+                description: "Shows how cash flowed in and out of the business during a period. It's divided into three sections: Operating (day-to-day business), Investing (buying/selling assets), and Financing (borrowing/repaying, issuing stock)."
+            }
+        };
+
+        const quizQuestions = [
+            {
+                question: "Which financial statement shows a company's financial position at a specific point in time?",
+                options: ["A) Income Statement", "B) Balance Sheet", "C) Statement of Cash Flows", "D) Statement of Equity"],
+                correct: 1
+            },
+            {
+                question: "What is the fundamental accounting equation?",
+                options: ["A) Revenue - Expenses = Net Income", "B) Assets = Liabilities + Equity", "C) Cash In - Cash Out = Net Cash", "D) Assets - Liabilities = Revenue"],
+                correct: 1
+            },
+            {
+                question: "Which characteristic means financial information should be available when needed for decision-making?",
+                options: ["A) Relevance", "B) Comparability", "C) Timeliness", "D) Verifiability"],
+                correct: 2
+            },
+            {
+                question: "Net Income from the Income Statement flows directly into which other financial statement?",
+                options: ["A) Balance Sheet", "B) Statement of Cash Flows", "C) Statement of Retained Earnings", "D) All of the above"],
+                correct: 2
+            },
+            {
+                question: "Which type of business organization provides limited liability protection to its owners?",
+                options: ["A) Sole Proprietorship", "B) Partnership", "C) Corporation", "D) All of the above"],
+                correct: 2
+            },
+            {
+                question: "Cash received from customers would be classified as which type of cash flow activity?",
+                options: ["A) Operating Activities", "B) Investing Activities", "C) Financing Activities", "D) None of the above"],
+                correct: 0
+            },
+            {
+                question: "Which organization is primarily responsible for creating GAAP in the United States?",
+                options: ["A) SEC", "B) AICPA", "C) FASB", "D) IRS"],
+                correct: 2
+            },
+            {
+                question: "Which of the following would be classified as a current asset on the Balance Sheet?",
+                options: ["A) Land", "B) Equipment", "C) Accounts Receivable", "D) Long-term Notes Payable"],
+                correct: 2
+            }
+        ];
+
+        let currentQuiz = 0;
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function showSection(section) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section, .quiz-section');
+            sections.forEach(s => s.classList.remove('active'));
+            sections.forEach(s => s.style.display = 'none');
+            
+            // Show current section
+            if (section <= 10) {
+                document.getElementById(`section${section}`).style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById(`section${section}`).classList.add('active');
+                }, 100);
+            } else {
+                document.getElementById('quizSection').style.display = 'block';
+                setTimeout(() => {
+                    document.getElementById('quizSection').classList.add('active');
+                }, 100);
+            }
+            
+            // Update navigation buttons
+            document.getElementById('prevButton').disabled = section === 1;
+            document.getElementById('nextButton').style.display = section === totalSections ? 'none' : 'block';
+            
+            updateProgress();
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections) {
+                currentSection++;
+                showSection(currentSection);
+                
+                if (currentSection === totalSections) {
+                    loadQuiz();
+                }
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 1) {
+                currentSection--;
+                showSection(currentSection);
+            }
+        }
+
+        function showDetails(type) {
+            const details = {
+                'sole-prop': 'Easiest to form, all profits go to owner, but owner has unlimited personal liability for business debts.',
+                'partnership': 'Shared ownership and profits, but partners are personally liable for all business debts.',
+                'corporation': 'Most complex but offers limited liability protection. Can raise capital by selling stock.',
+                'llc': 'Relatively new form combining the liability protection of corporations with tax benefits of partnerships.'
+            };
+            
+            alert(details[type]);
+        }
+
+        function toggleDecisionMakers() {
+            const element = document.getElementById('decisionMakers');
+            element.style.display = element.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleConnectionDetails() {
+            const element = document.getElementById('connectionDetails');
+            element.style.display = element.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleGAAPDetails() {
+            const element = document.getElementById('gaapDetails');
+            element.style.display = element.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function explainStatement(type) {
+            const details = document.getElementById('statementDetails');
+            const title = document.getElementById('statementTitle');
+            const description = document.getElementById('statementDescription');
+            
+            title.textContent = statementData[type].title;
+            description.textContent = statementData[type].description;
+            details.style.display = 'block';
+            
+            // Smooth scroll to details
+            details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function loadQuiz() {
+            const question = quizQuestions[currentQuiz];
+            document.getElementById('quizQuestion').textContent = question.question;
+            
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                option.textContent = question.options[index];
+                option.style.background = 'rgba(255,255,255,0.2)';
+                option.onclick = () => selectAnswer(index);
+            });
+            
+            document.getElementById('quizResult').innerHTML = '';
+        }
+
+        function selectAnswer(selected) {
+            const question = quizQuestions[currentQuiz];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach((option, index) => {
+                if (index === question.correct) {
+                    option.style.background = 'rgba(76, 175, 80, 0.8)';
+                } else if (index === selected && selected !== question.correct) {
+                    option.style.background = 'rgba(244, 67, 54, 0.8)';
+                }
+                option.onclick = null;
+            });
+            
+            const resultDiv = document.getElementById('quizResult');
+            if (selected === question.correct) {
+                resultDiv.innerHTML = '<h3 style="color: #4CAF50;">✅ Correct! Great job!</h3>';
+            } else {
+                resultDiv.innerHTML = '<h3 style="color: #f44336;">❌ Not quite. The correct answer is highlighted in green.</h3>';
+            }
+            
+            // Auto advance to next question or completion
+            setTimeout(() => {
+                if (currentQuiz < quizQuestions.length - 1) {
+                    currentQuiz++;
+                    loadQuiz();
+                } else {
+                    showCompletion();
+                }
+            }, 2500);
+        }
+
+        function showCompletion() {
+            // Generate completion code with timestamp and student identifier
+            const now = new Date();
+            const timestamp = now.toISOString().slice(0, 19).replace(/[-:]/g, '').replace('T', '-');
+            const randomNum = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+            const completionCode = `ACCT1-${timestamp}-${randomNum}`;
+            
+            document.getElementById('completionCode').textContent = completionCode;
+            document.getElementById('completionBadge').style.display = 'block';
+            document.getElementById('quizSection').style.display = 'none';
+        }
+
+        function copyCompletionCode() {
+            const code = document.getElementById('completionCode').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Completion code copied to clipboard!');
+            }).catch(() => {
+                alert('Please manually copy the code: ' + code);
+            });
+        }
+
+        // Initialize
+        showSection(1);
+        updateProgress();
+    </script>
+</body>
+</html>
